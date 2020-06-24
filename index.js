@@ -1,6 +1,6 @@
 const dir = process.argv[process.argv.length-1];
 const fs = require('fs');
-// const fsPromises = fs.promises;
+
 const ExifImage = require('exif').ExifImage;
 
 fs.readdir(dir, (err, files) => {
@@ -13,14 +13,9 @@ fs.readdir(dir, (err, files) => {
                 }
                 else{
                     if(exifData.exif.CreateDate){
-                        // console.log(exifData.exif.CreateDate); // Do something with your data!
                         const extension = file.substring(file.lastIndexOf('.'));
                         let newFileName = exifData.exif.CreateDate + "__" + new Date().getTime() + extension;
-                        // console.log(newFileName);
-                        // fsPromises.copyFile(dir+file, '~/Downloads/vivienne/photosreorg/' + newFileName).catch((error) => {
-                        //     console.log(error);
-                        // });
-                        fs.copyFile(dir+file, '~/Downloads/vivienne/photosreorg/' + newFileName, fs.constants.COPYFILE_EXCL, (err) => {
+                        fs.copyFile(dir+file, '/Users/matthuntington/Downloads/reorg/'+newFileName, fs.constants.COPYFILE_EXCL, (err) => {
                             if(err){
                                 console.log(err);
                             }
